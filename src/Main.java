@@ -19,39 +19,25 @@ public class Main {
     }
 
     public boolean isStrong(String password) {
-        boolean length = false;
-        boolean hasUppercase = false;
-        boolean hasDigit = false;
 
         char[] charUppercase = password.toCharArray();
         int uppercaseCount = 0;
         int digitCount = 0;
 
         // is length >= 8
-        if (password.length() >= 8) {
-            length = true;
+        if (password.length() < 8) {
+            return false;
         }
 
-        // has min 2 uppercase
+        // has min 2 uppercase / has min 3 digits
         for (char passwordChar : charUppercase) {
             if (Character.isUpperCase(passwordChar)) {
                 uppercaseCount++;
-            }
-        }
-        if (uppercaseCount >= 2) {
-            hasUppercase = true;
-        }
-
-        // has min 3 digits
-        for (char passwordChar : charUppercase) {
-            if (Character.isDigit(passwordChar)) {
+            } else if (Character.isDigit(passwordChar)) {
                 digitCount++;
             }
         }
-        if (digitCount >= 3) {
-            hasDigit = true;
-        }
 
-        return length && hasUppercase && hasDigit;
+        return uppercaseCount > 1 && digitCount > 2;
     }
 }
